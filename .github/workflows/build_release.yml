@@ -41,18 +41,18 @@ jobs:
 
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
-        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ github.ref_name }}_${{ matrix.release_suffix }}
       
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
-        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ github.ref_name }}_${{ matrix.release_suffix }}
 
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
-        run: cargo build --release && copy target/release/dta2pqt.exe dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
+        run: cargo build --release && copy target/release/dta2pqt.exe dta2pqt_${{ github.ref_name }}_${{ matrix.release_suffix }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ needs.create_release.outputs.tag-name }}
-          files: dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
+          tag_name: ${{ github.ref_name }}
+          files: dta2pqt_${{ github.ref_name }}_${{ matrix.release_suffix }}
