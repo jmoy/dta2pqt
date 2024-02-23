@@ -29,11 +29,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            release_file: dbt2pqt_linux
+            release_file: dta2pqt_linux
           - os: macos-latest
-            release_file: dbt2pqt_mac
+            release_file: dta2pqt_mac
           - os: windows-latest
-            release_file: dbt2pqt_win.exe
+            release_file: dta2pqt_win.exe
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -41,15 +41,15 @@ jobs:
 
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
-        run: cargo build --release && cp target/release/dbt2pqt dbt2pqt_linux
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_linux
       
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
-        run: cargo build --release && cp target/release/dbt2pqt dbt2pqt_mac
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_mac
 
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
-        run: cargo build --release && cp target/release/dbt2pqt.exe dbt2pqt_win.exe
+        run: cargo build --release && copy target/release/dta2pqt.exe dta2pqt_win.exe
 
       - name: Release
         uses: softprops/action-gh-release@v1
