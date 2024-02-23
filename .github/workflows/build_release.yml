@@ -29,11 +29,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            release_suffix: _linux
+            release_suffix: linux
           - os: macos-latest
-            release_suffix: _mac
+            release_suffix: mac
           - os: windows-latest
-            release_suffix: _win.exe
+            release_suffix: win.exe
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
