@@ -29,11 +29,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            release_file: dta2pqt_linux
+            release_suffix: _linux
           - os: macos-latest
-            release_file: dta2pqt_mac
+            release_suffix: _mac
           - os: windows-latest
-            release_file: dta2pqt_win.exe
+            release_suffix: _win.exe
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -41,18 +41,18 @@ jobs:
 
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
-        run: cargo build --release && cp target/release/dta2pqt dta2pqt_linux
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
       
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
-        run: cargo build --release && cp target/release/dta2pqt dta2pqt_mac
+        run: cargo build --release && cp target/release/dta2pqt dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
 
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
-        run: cargo build --release && copy target/release/dta2pqt.exe dta2pqt_win.exe
+        run: cargo build --release && copy target/release/dta2pqt.exe dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
-          files: ${{ matrix.release_file }}
+          files: dta2pqt_${{ needs.create_release.outputs.tag-name }}_${{ matrix.release_suffix }}
