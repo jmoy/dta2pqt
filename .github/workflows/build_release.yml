@@ -5,6 +5,8 @@ on:
     tags:
       - 'v*'
 
+permissions: write-all
+
 jobs:
   create_release:
     name: Create Release
