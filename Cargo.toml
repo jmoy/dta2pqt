@@ -1,0 +1,20 @@
+[package]
+name = "dta2pqt"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+mmap-rs = "0.6.1"
+nom = "7.1"
+arrow = "50.0.0"
+arrow-array = "50.0.0"
+parquet = "50.0.0"
+rayon = "1.8.1"
+crossbeam-channel = "0.5.11"
+clap = { version = "4.5.1", features = ["derive"] }
+
+
+[profile.release]
+debug = true
