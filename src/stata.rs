@@ -4,7 +4,7 @@ pub mod values;
 pub mod file;
 pub mod error;
 
-#[derive(Debug)]
+#[derive(Debug,Clone, Copy)]
 pub enum VarType {
     TStrf(u16),
     TStrl,
